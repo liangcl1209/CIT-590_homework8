@@ -8,6 +8,7 @@ public class Ocean {
     //The total number of shots fired by the user
     private int shotsFired;
 
+    
     //The number of times a shot hit a ship. 
     //If the user shoots the same part of a ship more than once, every hit is counted, even though additional “hits” don’t do the user any good.
     private int hitCount;
