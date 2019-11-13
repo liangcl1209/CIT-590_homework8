@@ -116,9 +116,64 @@ public abstract class Ship {
 	 * @return if it is legal to place ship
 	 */
 	boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean){
+		
+		int lengthOfShip = this.getLength();
+		boolean ok = true;
 
-		return false;
+ 		if(horizontal){			
+			int edgeColumnLeft = column-lengthOfShip + 1;
+			int edgeColumnRight = column +1;
+			int edgeRowUp = row - 1;
+			int edgeRowDown = row + 1; 
+			this.checkBoundaries(edgeColumnLeft, edgeColumnRight, edgeRowDown, edgeRowUp);
+			if(column - lengthOfShip  < -1){
+				return false;
+			}else{				
+				for(int n = edgeColumnRight; n> edgeColumnLeft; n--){
+					boolean BC1 = ocean.isOccupied(edgeRowUp, n);
+					boolean BC2 = ocean.isOccupied(edgeRowDown, n);
+					boolean BC3 = ocean.isOccupied(row, n);
+					if(!BC1 || !BC2 || !BC3){
+						return false;
+					}
+				}
+				return ok;
+			}
+		}else{
+			if(row - lengthOfShip < -1){
+				return false;
+			}else{
+				int edgeColumnLeft = column - 1;
+				int edgeColumnRight = column +1;
+				int edgeRowDown = row + 1;
+				int edgeRowUp = row - lengthOfShip + 1;
+				this.checkBoundaries(edgeColumnLeft, edgeColumnRight, edgeRowDown, edgeRowUp);
+				for(int i = edgeRowUp; i < edgeRowDown; i++){
+					boolean BC1 = ocean.isOccupied(i, edgeColumnLeft);
+					boolean BC2 = ocean.isOccupied(i, edgeColumnRight);
+					boolean BC3 = ocean.isOccupied(i, column);
+					if(!BC1 || !BC2 || !BC3){
+						return false;
+						}
+					}
+					return ok;
+				}
+			}		
+		}
+	
 
+/**
+ * Check the boundaries of ship, if the ship is at the boundary, then set the column and row which are out of the matrix back to edge.
+ * @param edgeColumnLeft
+ * @param edgeColumnRight
+ * @param edgeRowDown
+ * @param edgeRowUp
+ */
+	void checkBoundaries(int edgeColumnLeft, int edgeColumnRight, int edgeRowDown, int edgeRowUp){
+		if(edgeColumnLeft < 0) edgeColumnLeft = 0;
+		if(edgeRowDown > 9) edgeRowDown = 9;
+		if(edgeRowUp < 0) edgeRowUp = 0;
+		if(edgeColumnRight > 9) edgeColumnRight = 9;
 	}
 
 	/**
@@ -145,8 +200,14 @@ public abstract class Ship {
 	 * @return true after mark "hit"; otherwise return false
 	 */
 	boolean shootAt(int row, int column){
-
-		return true;
+		boolean checkIsSunk = this.isSunk();
+		if(checkIsSunk){
+			return false;
+		}else{
+			
+			return true;
+		}
+		
 	}
 
 	/**
@@ -156,8 +217,8 @@ public abstract class Ship {
 	boolean isSunk(){
 		boolean[] hit;
 		hit = getHit();
-		for (boolean item : hit){
-			if(item == false){
+		for (int i = 0; i< this.getLength();i++){
+			if(hit[i] == false){
 				return false;
 			}
 		}

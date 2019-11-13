@@ -58,7 +58,13 @@ public class Ocean {
      */
     boolean isOccupied(int row, int column){
 
-        return false;
+        Ship ship = this.getShipArray()[row][column];
+        String shipType = ship.getShipType();
+        if(shipType != "empty") {
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
@@ -74,6 +80,29 @@ public class Ocean {
      */
     int getHitCount(){
         return this.hitCount;
+    }
+
+    /**
+     * Returns true if the given location contains a ”real” ship, still afloat, (not an EmptySea), 
+     * false if it does not. 
+     * In addition, this method updates the number of shots that have been fired, and the number of hits. 
+     * @param row
+     * @param column
+     * @return
+     */
+    boolean shootAt(int row, int column){
+        //boolean checkRealShip = this.isOccupied(row, column);
+        Ship[][] ships = this.getShipArray();
+        boolean checkShiphit = ships[row][column].shootAt(row, column);
+        boolean checkIsSunk = ships[row][column].isSunk();
+        this.shotsFired += 1;
+        if( checkShiphit && !checkIsSunk){
+            this.hitCount += 1;
+            return true;
+        }else{
+            return false;
+        }
+
     }
 
     /**
@@ -116,8 +145,22 @@ public class Ocean {
 
         System.out.println("  0 1 2 3 4 5 6 7 8 9");
 
-        for(Ship[] rowOfShip : ships){
+        for(int i = 0 ; i<= 9; i++){
             //TODO
+            System.out.print(i + " ");
+           for(int j = 0; j <= 9; j++){
+                String stringOfStatus = ".";
+                if(this.shootAt(i, j) == false && this.isOccupied(i,j) == false){
+                    stringOfStatus = ".";
+                }else if(this.shootAt(i, j) == true){
+                    stringOfStatus = ships[i][j].toString();
+                }else if(this.isOccupied(i, j) == false && ships[i][j].getHit()[0] == true){
+                    stringOfStatus = ships[i][j].toString();
+                }   
+               
+                System.out.print(stringOfStatus + " ");
+                if(j==9) System.out.print("\n");
+            }
         }
     }
 }
