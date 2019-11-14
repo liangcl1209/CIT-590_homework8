@@ -264,7 +264,7 @@ public abstract class Ship {
 	@Override 
 	public String toString(){
 		boolean sunk = this.isSunk();
-		System.out.println(sunk);
+		//System.out.println(sunk);
 		if (sunk){
 			return "s ";
 		}else {

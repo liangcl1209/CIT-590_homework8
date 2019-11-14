@@ -152,8 +152,31 @@ public class Ocean {
             //TODO
             System.out.print(i + " ");
            for(int j = 0; j <= 9; j++){
+                Ship ship = ships[i][j];
                 String stringOfStatus = "? ";
-                
+                if(ship.getShipType() == "empty"){
+                    boolean checkHit = ship.getHit()[0];
+                    if(checkHit){
+                        stringOfStatus = ship.toString();
+                    }else{
+                        stringOfStatus = ". ";
+                    }
+                }else{
+                    int bowColumn = ship.getBowColumn();
+			        int bowRow = ship.getBowRow();
+			        int position;
+			        if(ship.isHorizontal()){
+				        position = bowColumn - j;
+			        }else{
+				        position = bowRow - i;
+			        }
+
+			        if(ship.getHit()[position] == true){
+                        stringOfStatus = ship.toString();
+                    }else{
+                        stringOfStatus = ". ";
+                    }
+                }
                 System.out.print(stringOfStatus);
                 if(j==9) System.out.print("\n");
             }
