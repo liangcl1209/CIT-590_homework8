@@ -1,5 +1,7 @@
 package battleship;
 
+import java.util.Random;
+
 public class Ocean {
 
     //Used to quickly determine which ship is in any given location
@@ -47,6 +49,69 @@ public class Ocean {
      */
     void placeAllShipsRandomly(){
         //TODO by Liang
+    	Random random = new Random();
+    	//place battleship
+    	boolean horizontal = random.nextInt(2)==0?true:false;
+    	int row = random.nextInt(10);
+    	int column = random.nextInt(10);
+    	Battleship battleship = new Battleship();
+    	while(true) {
+    		if(battleship.okToPlaceShipAt(row, column, horizontal, this)==true) {
+        		battleship.placeShipAt(row, column, horizontal, this);
+        		System.out.println("battleship placed");
+        		break;	
+        	}
+    		row = random.nextInt(10);
+    		column = random.nextInt(10);
+    	}
+    	//place cruiser
+    	for(int i = 2; i>0;i--) {
+    		boolean horizontal1 = random.nextInt(2)==0?true:false;
+        	int row1 = random.nextInt(10);
+        	int column1 = random.nextInt(10);
+        	Cruiser cruiser = new Cruiser();
+        	while(true) {
+        		if(cruiser.okToPlaceShipAt(row1, column1, horizontal1, this)==true) {
+        			cruiser.placeShipAt(row1, column1, horizontal1, this);
+        			System.out.println("cruiser placed");
+        			break;
+        		}
+        		row1 = random.nextInt(10);
+        		column1 = random.nextInt(10);	
+        	}	
+    	}
+    	// place destroyer
+    	for(int i = 3; i>0;i--) {
+    		boolean horizontal2 = random.nextInt(2)==0?true:false;
+        	int row2 = random.nextInt(10);
+        	int column2 = random.nextInt(10);
+        	Destroyer destroyer = new Destroyer();
+        	while(true) {
+        		if(destroyer.okToPlaceShipAt(row2, column2, horizontal2, this)==true) {
+        			destroyer.placeShipAt(row2, column2, horizontal2, this);
+        			System.out.println("destroyer placed");
+        			break;
+        		}
+        		row2 = random.nextInt(10);
+        		column2 = random.nextInt(10);	
+        	}	
+    	}
+    	// place submarine
+    	for(int i = 4; i>0;i--) {
+    		boolean horizontal3 = random.nextInt(2)==0?true:false;
+        	int row3 = random.nextInt(10);
+        	int column3 = random.nextInt(10);
+        	Submarine submarine = new Submarine();
+        	while(true) {
+        		if(submarine.okToPlaceShipAt(row3, column3, horizontal3, this)==true) {
+        			submarine.placeShipAt(row3, column3, horizontal3, this);
+        			System.out.println("submarine placed");
+        			break;
+        		}
+        		row3 = random.nextInt(10);
+        		column3 = random.nextInt(10);	
+        	}	
+    	}	
     }
 
     /**
