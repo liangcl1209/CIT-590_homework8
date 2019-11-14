@@ -93,16 +93,19 @@ public class Ocean {
     boolean shootAt(int row, int column){
         //boolean checkRealShip = this.isOccupied(row, column);
         Ship[][] ships = this.getShipArray();
-        boolean checkShiphit = ships[row][column].shootAt(row, column);
         boolean checkIsSunk = ships[row][column].isSunk();
         this.shotsFired += 1;
-        if( checkShiphit && !checkIsSunk){
-            this.hitCount += 1;
-            return true;
+        if(checkIsSunk){
+            return false;
         }else{
+            boolean checkShiphit = ships[row][column].shootAt(row, column);        
+    
+            if(checkShiphit){
+                this.hitCount +=1;
+                return true;
+            }
             return false;
         }
-
     }
 
     /**
@@ -144,21 +147,14 @@ public class Ocean {
     void print(){
 
         System.out.println("  0 1 2 3 4 5 6 7 8 9");
-
+        
         for(int i = 0 ; i<= 9; i++){
             //TODO
             System.out.print(i + " ");
            for(int j = 0; j <= 9; j++){
-                String stringOfStatus = ".";
-                if(this.shootAt(i, j) == false && this.isOccupied(i,j) == false){
-                    stringOfStatus = ".";
-                }else if(this.shootAt(i, j) == true){
-                    stringOfStatus = ships[i][j].toString();
-                }else if(this.isOccupied(i, j) == false && ships[i][j].getHit()[0] == true){
-                    stringOfStatus = ships[i][j].toString();
-                }   
-               
-                System.out.print(stringOfStatus + " ");
+                String stringOfStatus = "? ";
+                
+                System.out.print(stringOfStatus);
                 if(j==9) System.out.print("\n");
             }
         }

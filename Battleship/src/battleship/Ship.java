@@ -1,5 +1,6 @@
 package battleship;
 
+
 public abstract class Ship {
 	
 	/**
@@ -27,8 +28,8 @@ public abstract class Ship {
 	 */
 	public Ship(int length){
 		this.length = length;
-		this.hit = new boolean[length];
-		for (int n = 0; n <= length-1; n++){
+		this.hit = new boolean[4];
+		for (int n = 0; n <= 3; n++){
 			hit[n] = false;
 		}
 	}
@@ -190,6 +191,17 @@ public abstract class Ship {
 	 * @param ocean Ocean object
 	 */
 	void placeShipAt(int row, int column, boolean horizontal, Ocean ocean){
+		this.setBowColumn(column);
+		this.setBowRow(row);
+		if(!horizontal){
+			for(int i = row; i>=row-this.length+1 ; i--){
+				ocean.getShipArray()[i][column] = this;
+			}
+		}else{
+			for(int j = column; j>= column-this.length+1;j--){
+				ocean.getShipArray()[row][j] = this;
+			}
+		}
 
 	}
 
@@ -204,7 +216,16 @@ public abstract class Ship {
 		if(checkIsSunk){
 			return false;
 		}else{
-			
+			int bowColumn = this.getBowColumn();
+			int bowRow = this.getBowRow();
+			int position;
+			if(horizontal){
+				position = bowColumn - column;
+			}else{
+				position = bowRow - row;
+			}
+
+			hit[position] = true; 
 			return true;
 		}
 		
@@ -217,12 +238,20 @@ public abstract class Ship {
 	boolean isSunk(){
 		boolean[] hit;
 		hit = getHit();
-		for (int i = 0; i< this.getLength();i++){
-			if(hit[i] == false){
-				return false;
+		int hits = 0;
+		for (int i = 0; i< 4;i++){
+			if(hit[i] == true){
+				hits += 1;
 			}
+
 		}
-		return true;
+		if(hits == this.getLength()){
+			
+			return true;
+		}else{
+			return false;
+		}
+	
 	}
 
 
@@ -234,11 +263,12 @@ public abstract class Ship {
 	 */
 	@Override 
 	public String toString(){
-		boolean sunk = isSunk();
-		if (sunk == true){
-			return "s";
+		boolean sunk = this.isSunk();
+		System.out.println(sunk);
+		if (sunk){
+			return "s ";
 		}else {
-			return "x";
+			return "x ";
 		}
 	}
 }
