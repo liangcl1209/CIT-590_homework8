@@ -118,6 +118,7 @@ public abstract class Ship {
 	 */
 	boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean){
 		//TODO Bug found
+		/*
 		int lengthOfShip = this.getLength();
 		boolean ok = true;
 
@@ -167,7 +168,51 @@ public abstract class Ship {
 					}
 					return ok;
 				}
-			}		
+			}
+			*/
+		if(horizontal==true&&column-this.getLength()>=-1) {
+			
+			int count = this.getLength();
+			while(count>0) {
+				for(int i = row-1;i<=row+1;i++) {
+					for(int j = column-1;j<=column+1;j++) {
+						if(i>=0&j>=0) {
+							if(ocean.isOccupied(i, j)==true) {
+								System.out.println("not OK");
+								return false;
+							}
+						}
+						
+					}
+				}
+				column--;
+				count--;
+			}
+			
+			return true;
+		}
+		if(horizontal==false&&row-this.getLength()>=-1) {
+			int count = this.getLength();
+			while(count>0) {
+				for(int i = row-1;i<=row+1;i++) {
+					for(int j = column-1;j<=column+1;j++) {
+						if(i>=0&&j>=0) {
+							if(ocean.isOccupied(i, j)==true) {
+								System.out.println("not OK");
+								return false;
+							}
+						}
+						
+				
+				
+					}
+				}
+				row--;
+				count--;
+			}
+			return true;
+		}
+		return false;
 		}
 	
 
