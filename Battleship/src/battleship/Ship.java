@@ -117,7 +117,7 @@ public abstract class Ship {
 	 * @return if it is legal to place ship
 	 */
 	boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean){
-		
+		//TODO Bug found
 		int lengthOfShip = this.getLength();
 		boolean ok = true;
 
@@ -126,7 +126,11 @@ public abstract class Ship {
 			int edgeColumnRight = column +1;
 			int edgeRowUp = row - 1;
 			int edgeRowDown = row + 1; 
-			this.checkBoundaries(edgeColumnLeft, edgeColumnRight, edgeRowDown, edgeRowUp);
+			//this.checkBoundaries(edgeColumnLeft, edgeColumnRight, edgeRowDown, edgeRowUp);
+			if(edgeColumnLeft == -1) edgeColumnLeft = 0;
+			if(edgeRowDown ==10) edgeRowDown = 9;
+			if(edgeRowUp == -1) edgeRowUp = 0;
+			if(edgeColumnRight ==10) edgeColumnRight = 9;
 			if(column - lengthOfShip  < -1){
 				return false;
 			}else{				
@@ -148,7 +152,11 @@ public abstract class Ship {
 				int edgeColumnRight = column +1;
 				int edgeRowDown = row + 1;
 				int edgeRowUp = row - lengthOfShip + 1;
-				this.checkBoundaries(edgeColumnLeft, edgeColumnRight, edgeRowDown, edgeRowUp);
+				//this.checkBoundaries(edgeColumnLeft, edgeColumnRight, edgeRowDown, edgeRowUp);
+				if(edgeColumnLeft ==-1) edgeColumnLeft = 0;
+				if(edgeRowDown ==10 ) edgeRowDown = 9;
+				if(edgeRowUp == -1) edgeRowUp = 0;
+				if(edgeColumnRight ==10) edgeColumnRight = 9;
 				for(int i = edgeRowUp; i < edgeRowDown; i++){
 					boolean BC1 = ocean.isOccupied(i, edgeColumnLeft);
 					boolean BC2 = ocean.isOccupied(i, edgeColumnRight);
@@ -171,10 +179,10 @@ public abstract class Ship {
  * @param edgeRowUp
  */
 	void checkBoundaries(int edgeColumnLeft, int edgeColumnRight, int edgeRowDown, int edgeRowUp){
-		if(edgeColumnLeft < 0) edgeColumnLeft = 0;
-		if(edgeRowDown > 9) edgeRowDown = 9;
-		if(edgeRowUp < 0) edgeRowUp = 0;
-		if(edgeColumnRight > 9) edgeColumnRight = 9;
+		if(edgeColumnLeft <= 0) edgeColumnLeft = 0;
+		if(edgeRowDown >= 9) edgeRowDown = 9;
+		if(edgeRowUp <= 0) edgeRowUp = 0;
+		if(edgeColumnRight >= 9) edgeColumnRight = 9;
 	}
 
 	/**

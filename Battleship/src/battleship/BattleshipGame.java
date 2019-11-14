@@ -6,10 +6,7 @@ public class BattleshipGame {
 		// TODO Auto-generated method stub
 		Ocean ocean = new Ocean();
 		ocean.placeAllShipsRandomly();
-		Ship a = new Battleship();
-		a.placeShipAt(5, 5, false, ocean);
-		ocean.shootAt(5, 5);
-		ocean.shootAt(1, 1);
+		
 		ocean.print();
 	}
 
