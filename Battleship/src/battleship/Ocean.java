@@ -58,7 +58,7 @@ public class Ocean {
     	while(true) {
     		if(battleship.okToPlaceShipAt(row, column, horizontal, this)==true) {
         		battleship.placeShipAt(row, column, horizontal, this);
-        		System.out.println("battleship placed");
+        		//System.out.println("battleship placed");
         		break;	
         	}
     		row = random.nextInt(10);
@@ -73,7 +73,7 @@ public class Ocean {
         	while(true) {
         		if(cruiser.okToPlaceShipAt(row1, column1, horizontal1, this)==true) {
         			cruiser.placeShipAt(row1, column1, horizontal1, this);
-        			System.out.println("cruiser placed");
+        			//System.out.println("cruiser placed");
         			break;
         		}
         		row1 = random.nextInt(10);
@@ -89,7 +89,7 @@ public class Ocean {
         	while(true) {
         		if(destroyer.okToPlaceShipAt(row2, column2, horizontal2, this)==true) {
         			destroyer.placeShipAt(row2, column2, horizontal2, this);
-        			System.out.println("destroyer placed");
+        			//System.out.println("destroyer placed");
         			break;
         		}
         		row2 = random.nextInt(10);
@@ -105,7 +105,7 @@ public class Ocean {
         	while(true) {
         		if(submarine.okToPlaceShipAt(row3, column3, horizontal3, this)==true) {
         			submarine.placeShipAt(row3, column3, horizontal3, this);
-        			System.out.println("submarine placed");
+        			//System.out.println("submarine placed");
         			break;
         		}
         		row3 = random.nextInt(10);

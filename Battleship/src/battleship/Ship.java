@@ -176,9 +176,9 @@ public abstract class Ship {
 			while(count>0) {
 				for(int i = row-1;i<=row+1;i++) {
 					for(int j = column-1;j<=column+1;j++) {
-						if(i>=0&j>=0) {
+						if(i>=0 && j>=0 && i<10 && j<10) {
 							if(ocean.isOccupied(i, j)==true) {
-								System.out.println("not OK");
+								//System.out.println("not OK");
 								return false;
 							}
 						}
@@ -196,9 +196,9 @@ public abstract class Ship {
 			while(count>0) {
 				for(int i = row-1;i<=row+1;i++) {
 					for(int j = column-1;j<=column+1;j++) {
-						if(i>=0&&j>=0) {
+						if(i>=0&&j>=0&& i<10&& j<10) {
 							if(ocean.isOccupied(i, j)==true) {
-								System.out.println("not OK");
+								//System.out.println("not OK");
 								return false;
 							}
 						}
