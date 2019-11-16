@@ -107,7 +107,7 @@ public abstract class Ship {
 
 	/**
 	 * Based on the given row, column, and orientation, returns true if it is okay to put a ship of this length with its bow in this location; false otherwise.
-	 * The ship must not overlap another ship, or touch another ship (vertically, horizontally, or diagonally), and it must not ”stick out” beyond the array. 
+	 * The ship must not overlap another ship, or touch another ship (vertically, horizontally, or diagonally)
 	 * Does not actually change either the ship or the Ocean 
 	 * it just says if it is legal to do so.
 	 * @param row row of ship
@@ -117,59 +117,7 @@ public abstract class Ship {
 	 * @return if it is legal to place ship
 	 */
 	boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean){
-		//TODO Bug found
-		/*
-		int lengthOfShip = this.getLength();
-		boolean ok = true;
-
- 		if(horizontal){			
-			int edgeColumnLeft = column-lengthOfShip + 1;
-			int edgeColumnRight = column +1;
-			int edgeRowUp = row - 1;
-			int edgeRowDown = row + 1; 
-			//this.checkBoundaries(edgeColumnLeft, edgeColumnRight, edgeRowDown, edgeRowUp);
-			if(edgeColumnLeft == -1) edgeColumnLeft = 0;
-			if(edgeRowDown ==10) edgeRowDown = 9;
-			if(edgeRowUp == -1) edgeRowUp = 0;
-			if(edgeColumnRight ==10) edgeColumnRight = 9;
-			if(column - lengthOfShip  < -1){
-				return false;
-			}else{				
-				for(int n = edgeColumnRight; n> edgeColumnLeft; n--){
-					boolean BC1 = ocean.isOccupied(edgeRowUp, n);
-					boolean BC2 = ocean.isOccupied(edgeRowDown, n);
-					boolean BC3 = ocean.isOccupied(row, n);
-					if(!BC1 || !BC2 || !BC3){
-						return false;
-					}
-				}
-				return ok;
-			}
-		}else{
-			if(row - lengthOfShip < -1){
-				return false;
-			}else{
-				int edgeColumnLeft = column - 1;
-				int edgeColumnRight = column +1;
-				int edgeRowDown = row + 1;
-				int edgeRowUp = row - lengthOfShip + 1;
-				//this.checkBoundaries(edgeColumnLeft, edgeColumnRight, edgeRowDown, edgeRowUp);
-				if(edgeColumnLeft ==-1) edgeColumnLeft = 0;
-				if(edgeRowDown ==10 ) edgeRowDown = 9;
-				if(edgeRowUp == -1) edgeRowUp = 0;
-				if(edgeColumnRight ==10) edgeColumnRight = 9;
-				for(int i = edgeRowUp; i < edgeRowDown; i++){
-					boolean BC1 = ocean.isOccupied(i, edgeColumnLeft);
-					boolean BC2 = ocean.isOccupied(i, edgeColumnRight);
-					boolean BC3 = ocean.isOccupied(i, column);
-					if(!BC1 || !BC2 || !BC3){
-						return false;
-						}
-					}
-					return ok;
-				}
-			}
-			*/
+		
 		if(horizontal==true&&column-this.getLength()>=-1) {
 			
 			int count = this.getLength();
@@ -216,26 +164,13 @@ public abstract class Ship {
 		}
 	
 
-/**
- * Check the boundaries of ship, if the ship is at the boundary, then set the column and row which are out of the matrix back to edge.
- * @param edgeColumnLeft
- * @param edgeColumnRight
- * @param edgeRowDown
- * @param edgeRowUp
- */
-	void checkBoundaries(int edgeColumnLeft, int edgeColumnRight, int edgeRowDown, int edgeRowUp){
-		if(edgeColumnLeft <= 0) edgeColumnLeft = 0;
-		if(edgeRowDown >= 9) edgeRowDown = 9;
-		if(edgeRowUp <= 0) edgeRowUp = 0;
-		if(edgeColumnRight >= 9) edgeColumnRight = 9;
-	}
 
 	/**
-	 * “Puts” the ship in the ocean. 
+	 * place the ship in ocean
 	 * This involves giving values to the bowRow, bowColumn, 
 	 * and horizontal instance variables in the ship, 
 	 * and it also involves putting a reference to the ship in each of 1 or more locations (up to 4) in the ships array in the Ocean object. 
-	 * (Note: This will be as many as four identical references; you can’t refer to a ”part” of a ship, only to the whole ship.)
+	 * (Note: This will be as many as four identical references; you can refer to a part of a ship, only to the whole ship.)
 	 * horizontal ships face East
 	 * vertical ships face South
 	 * @param row bowRow
@@ -246,6 +181,7 @@ public abstract class Ship {
 	void placeShipAt(int row, int column, boolean horizontal, Ocean ocean){
 		this.setBowColumn(column);
 		this.setBowRow(row);
+		this.setHorizontal(horizontal);
 		if(!horizontal){
 			for(int i = row; i>=row-this.length+1 ; i--){
 				ocean.getShipArray()[i][column] = this;
@@ -259,7 +195,7 @@ public abstract class Ship {
 	}
 
 	/**
-	 * If a part of the ship occupies the given row and column, and the ship hasn’t been sunk, mark that part of the ship as “hit”
+	 * If a part of the ship occupies the given row and column, and the ship hasn't been sunk, mark that part of the ship as "hit"
 	 * @param row
 	 * @param column
 	 * @return true after mark "hit"; otherwise return false
@@ -272,7 +208,7 @@ public abstract class Ship {
 			int bowColumn = this.getBowColumn();
 			int bowRow = this.getBowRow();
 			int position;
-			if(horizontal){
+			if(this.horizontal == true){
 				position = bowColumn - column;
 			}else{
 				position = bowRow - row;
@@ -309,8 +245,8 @@ public abstract class Ship {
 
 
 	/**
-	 * Returns a single-character String to use in the Ocean’s print method. 
-	 * This method should return ”s” if the ship has been sunk and ”x” if it has not been sunk. 
+	 * Returns a single-character String to use in the Ocean to print method. 
+	 * This method should return ""s"" if the ship has been sunk and "x" if it has not been sunk. 
 	 * This method can be used to print out locations in the ocean that have been shot at; 
 	 * it should not be used to print locations that have not been shot at. Since toString behaves exactly the same for all ship types.
 	 */

@@ -167,6 +167,7 @@ public class Ocean {
     
             if(checkShiphit){
                 this.hitCount +=1;
+                if(ships[row][column].isSunk()) this.shipsSunk += 1;
                 return true;
             }
             return false;

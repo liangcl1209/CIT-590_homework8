@@ -1,4 +1,8 @@
 # CIT-590_homework8
 
 现在可以成功输出10x10的点阵
-cannot place ship
+随机放船
+开炮
+沉船
+现在是自动开炮模式
+
