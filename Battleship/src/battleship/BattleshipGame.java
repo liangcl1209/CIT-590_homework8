@@ -33,7 +33,7 @@ public class BattleshipGame {
     }
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 		boolean continumeGame = true;
 		Scanner scanner = new Scanner(System.in);
 		int row, column;
@@ -44,7 +44,7 @@ public class BattleshipGame {
 			while(!ocean.isGameOver()){
 				
 				System.out.println("Please input where you want to fire!");
-			/*	
+				
 				while(true){
 					System.out.println("row, column: ");
 					row = scanner.nextInt();
@@ -59,13 +59,14 @@ public class BattleshipGame {
 			}
 			
 			ocean.shootAt(row, column);
-			*/
-
+			
+			/*
 			for(int i =0; i<=9; i++){
 				for(int j =0;j<=9;j++){
 					ocean.shootAt(i, j);
 				}
 			}
+			*/
 			System.out.println("You have already fired: " + ocean.getShotsFired() + "times");
 			System.out.println("You have hitted: " + ocean.getHitCount()+ "times");
 			System.out.println("You have led " + ocean.getShipsSunk() + "ship(s) sunk.");
