@@ -523,7 +523,8 @@ class OceanTest {
 					if(ocean.getShipArray()[i][j].isSunk()) countCruiser++;
 				}
 			}
-		}assertEquals(2,countCruiser);
+		}
+		assertEquals(2,countCruiser);
 			
 	}
 }

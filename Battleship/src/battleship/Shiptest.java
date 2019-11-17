@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 class Shiptest {
 
-	Ship emptySea, submarine, destroyer, battleship, crusier;
+	Ship emptySea, submarine, destroyer, battleship, cruiser;
 	Ocean ocean;
 	@BeforeEach
 	void setUp() throws Exception {
@@ -15,16 +15,16 @@ class Shiptest {
 		 submarine = new Submarine();
 		 destroyer = new Destroyer();
 		 battleship = new Battleship();
-		 crusier = new Cruiser();
+		 cruiser = new Cruiser();
 		 ocean = new Ocean();
 		 emptySea.placeShipAt(0, 0, true, ocean);
 		 submarine.placeShipAt(1, 0, true, ocean);
 		 destroyer.placeShipAt(2, 1, true, ocean);
 		 battleship.placeShipAt(3, 3, true, ocean);
-		 crusier.placeShipAt(4, 2, true, ocean);
+		 cruiser.placeShipAt(4, 2, true, ocean);
 
 		 destroyer.setHorizontal(true);
-		 crusier.setHorizontal(false);
+		 cruiser.setHorizontal(false);
 		 submarine.setHorizontal(true);
 		 battleship.setHorizontal(true);
 
@@ -37,7 +37,7 @@ class Shiptest {
 		assertEquals(1, emptySea.getLength());
 		assertEquals(1, submarine.getLength());
 		assertEquals(2, destroyer.getLength());
-		assertEquals(3, crusier.getLength());
+		assertEquals(3, cruiser.getLength());
 		assertEquals(4, battleship.getLength());
 	}
 
@@ -47,7 +47,7 @@ class Shiptest {
 		assertEquals(1, submarine.getBowRow());
 		assertEquals(2, destroyer.getBowRow());
 		assertEquals(3, battleship.getBowRow());
-		assertEquals(4, crusier.getBowRow());
+		assertEquals(4, cruiser.getBowRow());
 	}
 
 	@Test
@@ -56,7 +56,7 @@ class Shiptest {
 		assertEquals(0, submarine.getBowColumn());
 		assertEquals(1, destroyer.getBowColumn());
 		assertEquals(3, battleship.getBowColumn());
-		assertEquals(2, crusier.getBowColumn());
+		assertEquals(2, cruiser.getBowColumn());
 	}
 
 	@Test
@@ -79,7 +79,7 @@ class Shiptest {
 	void testIsHorizontal() {
 		assertTrue(submarine.isHorizontal());
 		assertTrue(battleship.isHorizontal());
-		assertFalse(crusier.isHorizontal());
+		assertFalse(cruiser.isHorizontal());
 	}
 
 	@Test
@@ -95,7 +95,7 @@ class Shiptest {
 
 	@Test
 	void testSetBowColumn() {
-		crusier.setBowColumn(5);
+		cruiser.setBowColumn(5);
 		assertNotEquals(1,submarine.getBowColumn());
 		emptySea.setBowColumn(4);
 		assertEquals(4, emptySea.getBowColumn());
@@ -107,8 +107,8 @@ class Shiptest {
 	void testSetHorizontal() {
 		destroyer.setHorizontal(false);
 		assertFalse(destroyer.isHorizontal());
-		crusier.setHorizontal(true);
-		assertTrue(crusier.isHorizontal());
+		cruiser.setHorizontal(true);
+		assertTrue(cruiser.isHorizontal());
 		battleship.setHorizontal(true);
 		assertTrue(battleship.isHorizontal());
 	}
@@ -117,7 +117,7 @@ class Shiptest {
 	void testGetShipType() {
 		assertSame("empty", emptySea.getShipType());
 		assertEquals("Destroyer", destroyer.getShipType());
-		assertEquals("Crusier", crusier.getShipType());
+		assertEquals("Cruiser", cruiser.getShipType());
 		assertEquals("Submarine", submarine.getShipType());
 		assertEquals("Battleship", battleship.getShipType());
 	}
@@ -131,7 +131,7 @@ class Shiptest {
 		battleship.shootAt(3, 0);
 		String bat =  battleship.toString();
 		assertEquals("s ", bat);
-		assertEquals("x ", crusier.toString());
+		assertEquals("x ", cruiser.toString());
 		assertEquals("- ", emptySea.toString());
 
 	}
