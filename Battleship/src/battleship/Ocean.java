@@ -12,7 +12,7 @@ public class Ocean {
 
     
     //The number of times a shot hit a ship. 
-    //If the user shoots the same part of a ship more than once, every hit is counted, even though additional “hits” don’t do the user any good.
+    //If the user shoots the same part of a ship more than once, every hit is counted, even though additional hits do the user any good.
     private int hitCount;
 
     //The number of ships sunk (10 ships in all)
@@ -32,7 +32,7 @@ public class Ocean {
     }
 
     /**
-     * Creates an ”empty” ocean
+     * Creates an ocean
      * initializes any game variables, such as how many shots have been fired.
      */
     public Ocean(){
@@ -48,7 +48,7 @@ public class Ocean {
      * Place all ten ships randomly on the (initially empty) ocean. Place larger ships before smaller ones,
      */
     void placeAllShipsRandomly(){
-        //TODO by Liang
+        
     	Random random = new Random();
     	//place battleship
     	boolean horizontal = random.nextInt(2)==0?true:false;
@@ -115,7 +115,7 @@ public class Ocean {
     }
 
     /**
-     * Returns true if the given location contains a ”real” ship, still afloat,false if it does not. 
+     * Returns true if the given location contains a real ship, still afloat,false if it does not. 
      * In addition, this method updates the number of shots that have been fired, and the number of hits.
      * @param row 
      * @param column
@@ -148,7 +148,7 @@ public class Ocean {
     }
 
     /**
-     * Returns true if the given location contains a ”real” ship, still afloat, (not an EmptySea), 
+     * Returns true if the given location contains a real ship, still afloat, (not an EmptySea), 
      * false if it does not. 
      * In addition, this method updates the number of shots that have been fired, and the number of hits. 
      * @param row
@@ -205,10 +205,10 @@ public class Ocean {
     /** 
      * Prints the Ocean.
      * The top left corner square should be 0, 0.
-     * ‘x’: Use ‘x’ to indicate a location that you have fired upon and hit a (real) ship.
-     * ‘-’: Use ‘-’ to indicate a location that you have fired upon and found nothing there.
-     * Use ‘s’ to indicate a location containing a sunken ship.
-     * ‘.’: and use ‘.’ (a period) to indicate a location that you have never fired upon.
+     * Use "x" to indicate a location that you have fired upon and hit a (real) ship.
+     * Use "-" to indicate a location that you have fired upon and found nothing there.
+     * Use "s" to indicate a location containing a sunken ship.
+     * and use "." (a period) to indicate a location that you have never fired upon.
      */
     void print(){
 
