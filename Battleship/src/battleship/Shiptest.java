@@ -21,7 +21,7 @@ class Shiptest {
 		 submarine.placeShipAt(1, 0, true, ocean);
 		 destroyer.placeShipAt(2, 1, true, ocean);
 		 battleship.placeShipAt(3, 3, true, ocean);
-		 cruiser.placeShipAt(4, 2, true, ocean);
+		 cruiser.placeShipAt(4, 2, false, ocean);
 
 		 destroyer.setHorizontal(true);
 		 cruiser.setHorizontal(false);
@@ -136,4 +136,63 @@ class Shiptest {
 
 	}
 
+	@Test
+	void testOkToPlaceShipAt(){
+
+		assertFalse(destroyer.okToPlaceShipAt(2, 1, false, ocean));
+		assertTrue(submarine.okToPlaceShipAt(8, 8, true, ocean));
+		assertFalse(battleship.okToPlaceShipAt(0, 0, true, ocean));
+	}
+
+	@Test
+	void testPlaceShipAt(){
+		submarine.placeShipAt(5, 0, true, ocean);
+		assertEquals(submarine.getClass(), ocean.getShipArray()[5][0].getClass()); 
+		destroyer.placeShipAt(5, 1, false, ocean);
+		assertEquals(destroyer.getClass(), ocean.getShipArray()[4][1].getClass());
+		cruiser.placeShipAt(5, 2, false, ocean);
+		assertEquals(cruiser.getClass(), ocean.getShipArray()[3][2].getClass());
+		battleship.placeShipAt(5, 9, true, ocean);
+		assertEquals(battleship.getClass(), ocean.getShipArray()[5][8].getClass());
+	}
+
+	@Test
+	void testShootAt(){
+		submarine.shootAt(1, 0);
+		boolean[] array = {true,false,false,false};
+		assertArrayEquals(array, submarine.getHit());
+		destroyer.shootAt(2, 0);
+		array[0] = false;
+		array[1] = true;
+		assertArrayEquals(array, destroyer.getHit());
+		cruiser.shootAt(3, 2);
+		cruiser.shootAt(4, 2);
+		array[0] = true;
+		assertArrayEquals(array, cruiser.getHit());
+		battleship.shootAt(3, 3);
+		battleship.shootAt(3, 2);
+		battleship.shootAt(3, 1);
+		battleship.shootAt(3, 0);
+		array[2] = true;
+		array[3] = true;
+		assertArrayEquals(array, battleship.getHit());
+	}
+
+	@Test
+	void testIsSunk(){
+		battleship.shootAt(3, 3);
+		battleship.shootAt(3, 2);
+		battleship.shootAt(3, 1);
+		battleship.shootAt(3, 0);
+		assertTrue(battleship.isSunk());
+		assertFalse(submarine.isSunk());
+		destroyer.shootAt(2, 0);
+		assertFalse(destroyer.isSunk());
+		cruiser.shootAt(4, 2);
+		assertFalse(cruiser.isSunk());
+		emptySea.shootAt(0, 0);
+		assertFalse(emptySea.isSunk());
+	}
+
+	
 }
