@@ -2,20 +2,25 @@ package battleship;
 
 import java.util.Random;
 
+/**
+ * Class of the 10X10 ocean
+ */
 public class Ocean {
 
-    //Used to quickly determine which ship is in any given location
+    /**Used to quickly determine which ship is in any given location*/
     private Ship[][] ships = new Ship[10][10];
 
-    //The total number of shots fired by the user
+    /**The total number of shots fired by the user*/
     private int shotsFired;
 
     
-    //The number of times a shot hit a ship. 
-    //If the user shoots the same part of a ship more than once, every hit is counted, even though additional hits do the user any good.
+    /**The number of times a shot hit a ship. 
+    If the user shoots the same part of a ship more than once,
+    every hit is counted, even though additional hits do the user any good.
+    */
     private int hitCount;
 
-    //The number of ships sunk (10 ships in all)
+    /**The number of ships sunk (10 ships in all)*/
     private int shipsSunk;
 
     /**
@@ -119,7 +124,7 @@ public class Ocean {
      * In addition, this method updates the number of shots that have been fired, and the number of hits.
      * @param row 
      * @param column
-     * @return Ture if there is a ship
+     * @return True if there is a ship
      */
     boolean isOccupied(int row, int column){
 
@@ -133,7 +138,7 @@ public class Ocean {
     }
 
     /**
-     * 
+     * Get shots you have fired.
      * @return the number of shots fired (in the game)
      */
     int getShotsFired(){
@@ -141,6 +146,7 @@ public class Ocean {
     }
 
     /**
+     * Get hits you already hit.
      * @return the number of hits recorded (in the game). All hits are counted, not just the first time a given square is hit.
      */
     int getHitCount(){
@@ -175,6 +181,7 @@ public class Ocean {
     }
 
     /**
+     * Get if the ship is sunk.
      * @return the number of ships sunk (in the game)
      */
     int getShipsSunk(){
@@ -182,6 +189,7 @@ public class Ocean {
     }
 
     /**
+     * Check if the game is over.
      * @return true if all ships have been sunk, otherwise false
      */
     boolean isGameOver(){
@@ -194,7 +202,7 @@ public class Ocean {
     }
 
     /**
-     * 
+     * Get ships array from ocean.
      * @return the 10x10 array of Ships
      */
     Ship[][] getShipArray(){
