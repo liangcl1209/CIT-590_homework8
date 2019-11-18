@@ -326,12 +326,11 @@ class OceanTest {
 	void testGetHitCount() {
 		Ocean ocean1= new Ocean();
 		ocean1.placeAllShipsRandomly();
-		if(ocean1.getShipArray()[2][5].getShipType()!="empty") {
+		if(ocean1.getShipArray()[2][5].getShipType()=="Submarine") {
 			ocean1.shootAt(2,5);
 			assertEquals(1,ocean1.getHitCount());
 			ocean1.shootAt(2,5);
-			assertNotEquals(1,ocean1.getHitCount());
-			assertEquals(2,ocean1.getHitCount());
+			assertEquals(1,ocean1.getHitCount());
 		}else {
 			ocean1.shootAt(2,5);
 			assertEquals(0,ocean1.getHitCount());
