@@ -37,6 +37,7 @@ public class BattleshipGame {
 		boolean continumeGame = true;
 		Scanner scanner = new Scanner(System.in);
 		int row, column;
+		String strrow,strcolumn;
 		while(continumeGame){
 			Ocean ocean = new Ocean();
 			ocean.placeAllShipsRandomly();
@@ -47,15 +48,23 @@ public class BattleshipGame {
 				
 				while(true){
 					System.out.println("row, column: ");
-					row = scanner.nextInt();
-					column = scanner.nextInt();
-					if(row > 9 || row < 0){
-						System.out.println("please input the row index between 0-9!");
-					}else if(column > 9 || column <0){
-						System.out.println("please input the column index between 0-9!");
-					}else{
-						break;
+					strrow = scanner.next();
+					strcolumn = scanner.next();
+					try{
+						row = Integer.parseInt(strrow);
+						column = Integer.parseInt(strcolumn);
+						if(row > 9 || row < 0){
+							System.out.println("please input the row index between 0-9!");
+						}else if(column > 9 || column <0){
+							System.out.println("please input the column index between 0-9!");
+						}else{
+							break;
+						}
+					}catch(Exception e){
+						System.out.println("Invalid input!");
 					}
+					
+					
 			}
 			
 			ocean.shootAt(row, column);
